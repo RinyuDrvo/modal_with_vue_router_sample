@@ -1,14 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Contacts from '@/views/Contacts.vue'
+import ContactInfo from '@/views/ContactInfo.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/contacts'
+  },
+  {
+    path: '/contacts',
+    component: Contacts,
+    children: [
+      {
+        path: ':contactId',
+        component: ContactInfo,
+        props: true,
+        meta: {
+          showModal: true
+        }
+      }
+    ]
   },
   {
     path: '/about',
